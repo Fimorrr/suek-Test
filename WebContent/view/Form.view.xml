@@ -1,0 +1,77 @@
+<mvc:View
+	controllerName="example.ui.test.controller.Form"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormToolbar"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false"
+			ariaLabelledBy="Title1" >
+			<f:toolbar>
+				<Toolbar id="TB1">
+					<Title id="Title1" text="Address" level="H4" titleStyle="H4"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://settings"/>
+					<Button icon="sap-icon://drop-down-list" />
+				</Toolbar>
+			</f:toolbar>
+			<f:content>
+				<Toolbar ariaLabelledBy="Title2">
+					<Title id="Title2" text="Office" level="H5" titleStyle="H5"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://settings"/>
+				</Toolbar>
+				<Label text="Фамилия" />
+				<Input value="{SupplierName}" />
+				<Label text="Имя" />
+				<Input value="{Street}" />
+				<Label text="Отчество" />
+				<Input value="{Street}" />
+				<Label text="Дата рождения" />
+				<DatePicker
+					change="handleChange"/>
+				<Label text="Возраст" />
+				<Input value="{Street}" />
+				<Toolbar ariaLabelledBy="Title3">
+					<Title id="Title3" text="Online" level="H5" titleStyle="H5"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://settings"/>
+				</Toolbar>
+				<Label text="{values>/test} {values>/documentType}" />
+				<Select id="country" selectedKey="{values>/documentType}">
+					<items>
+						<core:Item text="Паспорт" key="passport"/>
+						<core:Item text="Водительское удостоверение" key="driverlicense"/>
+						<core:Item text="Военный билет" key="militaryid"/>
+					</items>
+				</Select>
+				<!--Паспорт-->
+				<Label text="1Номер Серия" fieldGroupIds="passport"/>
+				<Input value="{Street}" fieldGroupIds="passport"/>
+				<!--Водительское удостоверение-->
+				<Label text="2Номер" fieldGroupIds="driverlicense"/>
+				<Input value="{Street}" fieldGroupIds="driverlicense"/>
+				<!--Военный билет-->
+				<Label text="3Серия" fieldGroupIds="militaryid"/>
+				<Input value="{Street}" fieldGroupIds="militaryid"/>
+				
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+</mvc:View>

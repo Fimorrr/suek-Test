@@ -1,24 +1,13 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core">
-	<f:FormElement label="{i18n>qualification}">
-		<f:fields>
-			<Input value="Тест" class="sapUiMediumMarginBottom" />
-		</f:fields>
-	</f:FormElement>
-	<f:FormElement label="{i18n>document}">
-		<f:fields>
-			<Input value="Тест" />
-		</f:fields>
-	</f:FormElement>
-	<f:FormElement label="{i18n>graduationdate}">
-		<f:fields>
-			<DatePicker
-				placeholder="{i18n>choosedate}"
-				change="handleChange"/>
-		</f:fields>
-	</f:FormElement>
-	<f:FormElement label="{i18n>studyplace}">
-		<f:fields>
-			<Input value="Тест" />
-		</f:fields>
-	</f:FormElement>
+	<Label text="{i18n>studyplace}" />
+	<Input change="handleInputChange" fieldGroupIds="education"/>
+	<Label text="{i18n>graduationdate}" />
+	<DatePicker
+		placeholder="{i18n>choosedate}"
+		fieldGroupIds="education"
+		change="handleDateChange"/>
+	<Label text="{i18n>document}" />
+	<Input change="handleInputChange" fieldGroupIds="education"/>
+	<Label text="{i18n>qualification}" />
+	<Input change="handleInputChange" fieldGroupIds="education" class="sapUiMediumMarginBottom" />
 </core:FragmentDefinition>

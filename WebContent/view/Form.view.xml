@@ -8,7 +8,7 @@
 	<Page
 		title="test">
 		<headerContent>
-			<Button text="Готово" />
+			<Button press="handleContinue" text="Готово" />
 		</headerContent>
 		<content>
 		<f:SimpleForm id="SimpleFormToolbar"
@@ -32,17 +32,17 @@
 					<Title id="Title1" text="{i18n>personalinformation}" level="H5" titleStyle="H5"/>
 				</Toolbar>
 				<Label text="{i18n>surname}" />
-				<Input value="{SupplierName}" />
+				<Input value="{path: 'values>/surname', type: '.nameType'}"/>
 				<Label text="{i18n>name}" />
-				<Input value="{Street}" />
+				<Input value="{path: 'values>/name', type: '.nameType'}"/>
 				<Label text="{i18n>patronymic}" />
-				<Input value="{Street}" />
+				<Input value="{path: 'values>/patronymic', type: '.nameType'}"/>
 				<Label text="{i18n>birthday}" />
 				<DatePicker
 					placeholder="{i18n>choosedate}"
-					change="handleChange"/>
+					change="handleBirthdayChange"/>
 				<Label text="{i18n>age}" />
-				<Input value="{Street}" />
+				<Input value="{path: 'values>/age', type: '.ageType'}" enabled="false" type="Number"/>
 				
 				<Toolbar ariaLabelledBy="Title2">
 					<Title id="Title2" text="{i18n>documents}" level="H5" titleStyle="H5"/>
@@ -61,7 +61,10 @@
 				<Label text="{i18n>placeofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Label text="{i18n>dateofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<DatePicker
+					placeholder="{i18n>choosedate}"
+					change="handleDateChange"
+					visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<!--Водительское удостоверение-->
 				<Label text="{i18n>numberid}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
 				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>

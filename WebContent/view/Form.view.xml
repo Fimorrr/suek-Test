@@ -5,7 +5,12 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
-	<VBox class="sapUiSmallMargin">
+	<Page
+		title="test">
+		<headerContent>
+			<Button text="Готово" />
+		</headerContent>
+		<content>
 		<f:SimpleForm id="SimpleFormToolbar"
 			editable="true"
 			layout="ResponsiveGridLayout"
@@ -21,57 +26,66 @@
 			columnsXL="2"
 			columnsL="1"
 			columnsM="1"
-			singleContainerFullSize="false"
-			ariaLabelledBy="Title1" >
-			<f:toolbar>
-				<Toolbar id="TB1">
-					<Title id="Title1" text="Address" level="H4" titleStyle="H4"/>
-					<ToolbarSpacer />
-					<Button icon="sap-icon://settings"/>
-					<Button icon="sap-icon://drop-down-list" />
-				</Toolbar>
-			</f:toolbar>
+			singleContainerFullSize="false" >
 			<f:content>
-				<Toolbar ariaLabelledBy="Title2">
-					<Title id="Title2" text="Office" level="H5" titleStyle="H5"/>
-					<ToolbarSpacer />
-					<Button icon="sap-icon://settings"/>
+				<Toolbar ariaLabelledBy="Title1">
+					<Title id="Title1" text="{i18n>personalinformation}" level="H5" titleStyle="H5"/>
 				</Toolbar>
-				<Label text="Фамилия" />
+				<Label text="{i18n>surname}" />
 				<Input value="{SupplierName}" />
-				<Label text="Имя" />
+				<Label text="{i18n>name}" />
 				<Input value="{Street}" />
-				<Label text="Отчество" />
+				<Label text="{i18n>patronymic}" />
 				<Input value="{Street}" />
-				<Label text="Дата рождения" />
+				<Label text="{i18n>birthday}" />
 				<DatePicker
+					placeholder="{i18n>choosedate}"
 					change="handleChange"/>
-				<Label text="Возраст" />
+				<Label text="{i18n>age}" />
 				<Input value="{Street}" />
-				<Toolbar ariaLabelledBy="Title3">
-					<Title id="Title3" text="Online" level="H5" titleStyle="H5"/>
-					<ToolbarSpacer />
-					<Button icon="sap-icon://settings"/>
+				
+				<Toolbar ariaLabelledBy="Title2">
+					<Title id="Title2" text="{i18n>documents}" level="H5" titleStyle="H5"/>
 				</Toolbar>
-				<Label text="{values>/test} {values>/documentType}" />
+				<Label text="{i18n>choosedocument}" />
 				<Select id="country" selectedKey="{values>/documentType}">
 					<items>
-						<core:Item text="Паспорт" key="passport"/>
-						<core:Item text="Водительское удостоверение" key="driverlicense"/>
-						<core:Item text="Военный билет" key="militaryid"/>
+						<core:Item text="{i18n>passport}" key="passport"/>
+						<core:Item text="{i18n>driverlicense}" key="driverlicense"/>
+						<core:Item text="{i18n>militaryid}" key="militaryid"/>
 					</items>
 				</Select>
 				<!--Паспорт-->
-				<Label text="1Номер Серия" fieldGroupIds="passport"/>
-				<Input value="{Street}" fieldGroupIds="passport"/>
+				<Label text="{i18n>serialnumber}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Label text="{i18n>placeofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Label text="{i18n>dateofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<!--Водительское удостоверение-->
-				<Label text="2Номер" fieldGroupIds="driverlicense"/>
-				<Input value="{Street}" fieldGroupIds="driverlicense"/>
+				<Label text="{i18n>numberid}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
+				<Label text="{i18n>validity}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
 				<!--Военный билет-->
-				<Label text="3Серия" fieldGroupIds="militaryid"/>
-				<Input value="{Street}" fieldGroupIds="militaryid"/>
+				<Label text="{i18n>number}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
+				<Label text="{i18n>commisariat}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
+				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
+				
+				<Toolbar ariaLabelledBy="Title3">
+					<Title id="Title3" text="{i18n>education}" level="H5" titleStyle="H5"/>
+					<ToolbarSpacer />
+					<Button press="handleAddEducationItem" icon="sap-icon://add"/>
+					<Button press="handleAddEducationItem" icon="sap-icon://less"/>
+				</Toolbar>
+				
+				<!-- <core:Fragment
+					fragmentName="example.ui.test.fragment.educationItem"
+					type="XML" /> -->
 				
 			</f:content>
 		</f:SimpleForm>
-	</VBox>
+	</content>
+	</Page>
 </mvc:View>

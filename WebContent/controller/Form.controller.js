@@ -10,8 +10,8 @@ sap.ui.define([
 		onInit: function() {
 			this.education = 0;
 			
-			var oView = this.getView();
-			var aInputs = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.Input");
+			const oView = this.getView();
+			const aInputs = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.Input");
 			
 			aInputs.forEach((oInput) => {
 				sap.ui.getCore().getMessageManager().registerObject(oInput, true);
@@ -20,19 +20,19 @@ sap.ui.define([
 		},
 		
 		handleBirthdayChange: function(oEvent) {
-			let oModel = this.getOwnerComponent().getModel("values");
-			let oDatePicker = oEvent.getSource();
+			const oModel = this.getOwnerComponent().getModel("values");
+			const oDatePicker = oEvent.getSource();
 			
-			let oDateValue = oDatePicker.getDateValue();
-			let oDateNow = new Date();
+			const oDateValue = oDatePicker.getDateValue();
+			const oDateNow = new Date();
 			
-			let fDiff = oDateNow - oDateValue;
+			const fDiff = oDateNow - oDateValue;
 			
 			if (fDiff < 0) {
 				oModel.setProperty("/age", "");
 			} 
 			else {
-				let iYearsBetween = Math.abs(new Date(fDiff).getUTCFullYear() - 1970);
+				const iYearsBetween = Math.abs(new Date(fDiff).getUTCFullYear() - 1970);
 				oModel.setProperty("/age", iYearsBetween);
 			}
 			
@@ -40,22 +40,22 @@ sap.ui.define([
 		},
 		
 		handleDateChange: function(oEvent) {
-			let oDatePicker = oEvent.getSource();
+			const oDatePicker = oEvent.getSource();
 			
 			this._validateDatePicker(oDatePicker);
 		},
 		
 		handleInputChange: function(oEvent) {
-			let oInput = oEvent.getSource();
+			const oInput = oEvent.getSource();
 			
 			this._validateInput(oInput);
 		},
 		
 		handleAddEducationItem: function(oEvent) {
-			let oView = this.getView();
-			let oForm = oView.byId("SimpleFormToolbar");
+			const oView = this.getView();
+			const oForm = oView.byId("SimpleFormToolbar");
 			
-			let aItem = sap.ui.xmlfragment(oView.getId(), "example.ui.test.fragment.educationItem", this);
+			const aItem = sap.ui.xmlfragment(oView.getId(), "example.ui.test.fragment.educationItem", this);
 			
 			aItem.forEach((oItem) => {
 				oItem.setFieldGroupIds("education" + this.education);
@@ -71,12 +71,12 @@ sap.ui.define([
 				return;
 			}
 			
-			let oView = this.getView();
-			let oForm = oView.byId("SimpleFormToolbar");
+			const oView = this.getView();
+			const oForm = oView.byId("SimpleFormToolbar");
 
 			this.education -= 1;
 			
-			let aControl = oForm.getControlsByFieldGroupId("education" + this.education);
+			const aControl = oForm.getControlsByFieldGroupId("education" + this.education);
 			
 			aControl.forEach((oControl) => {
 				oForm.removeContent(oControl);
@@ -84,10 +84,9 @@ sap.ui.define([
 		},
 
 		handleContinue : function () {
-			let that = this;
-			let oView = this.getView();
-			let aInput = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.Input");
-			let aDatePicker = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.DatePicker");
+			const oView = this.getView();
+			const aInput = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.Input");
+			const aDatePicker = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.DatePicker");
 			let bValidationError = false;
 
 			aInput.forEach((oInput) => {
@@ -99,16 +98,53 @@ sap.ui.define([
 			});
 			
 			if (!bValidationError) {
-				
+				this.fillValues.call(this);
+				this.getOwnerComponent().getRouter().navTo("table");
 			}
 		},
 		
-		getAllItems : function (oView, sName) {
-			let aContent = oView.getContent();
+		fillValues: function() {
+			const oView = this.getView();
+			const oForm = oView.byId("SimpleFormToolbar");
+			
+			const aItem = this.getAllItems(oForm, "all");
+			let aValue = [];
+			
+			let sTitle = "";
+			
+			aItem.forEach((oItem) => {
+				let sName = oItem.getMetadata().getName();
+				
+				switch(sName) {
+					case "sap.m.Toolbar":
+						sTitle = oItem.getContent()[0].getText();
+						break;
+					case "sap.m.Label":
+						aValue = [...aValue, {}];
+						aValue[aValue.length - 1].category = sTitle;
+						aValue[aValue.length - 1].name = oItem.getText();
+						aValue[aValue.length - 1].value = "";
+						break;
+					case "sap.m.Input":
+					case "sap.m.DatePicker":
+						aValue[aValue.length - 1].value += oItem.getValue();
+						break;
+					case "sap.m.Select":
+						aValue[aValue.length - 1].value += oItem.getSelectedItem().getText();
+						break;
+				}
+			});
+			
+			const oModel = oView.getModel("values");
+			oModel.setProperty("/items", aValue);
+		},
+		
+		getAllItems: function(oView, sName) {
+			const aContent = oView.getContent();
 			let aItem = [];
 			
 			aContent.forEach((oItem) => {
-				if (oItem.getVisible() && oItem.getMetadata().getName() === sName) {
+				if (oItem.getVisible() && (oItem.getMetadata().getName() === sName || sName === "all")) {
 					aItem = [...aItem, oItem];
 				}
 			});
@@ -117,7 +153,7 @@ sap.ui.define([
 		}, 
 		
 		_validateInput: function(oInput) {
-			let oBinding = oInput.getBinding("value");
+			const oBinding = oInput.getBinding("value");
 			let sValueState = "None";
 			let bValidationError = false;
 
@@ -142,7 +178,7 @@ sap.ui.define([
 		},
 		
 		_validateDatePicker: function(oDatePicker) {
-			let oDateValue = oDatePicker.getDateValue();
+			const oDateValue = oDatePicker.getDateValue();
 			let sValueState = "None";
 			let bValidationError = false;
 			
@@ -151,9 +187,9 @@ sap.ui.define([
 				bValidationError = true;
 			}
 			else {
-				let oDateNow = new Date();
+				const oDateNow = new Date();
 				
-				let fDiff = oDateNow - oDateValue;
+				const fDiff = oDateNow - oDateValue;
 				
 				if (fDiff < 0) {
 					sValueState = "Error";
@@ -173,9 +209,9 @@ sap.ui.define([
 				return oValue;
 			},
 			validateValue: function (oValue) {
-				var regex = /^[a-zA-Zа-яА-Я ]+$/;
+				const regex = /^[a-zA-Zа-яА-Я ]+$/;
 				if (!oValue.match(regex)) {
-					throw new ValidateException("Неверные данные");
+					throw new ValidateException();
 				}
 			}
 		}),
@@ -188,7 +224,7 @@ sap.ui.define([
 			},
 			validateValue: function (oValue) {
 				if (oValue < 0 || oValue > 150) {
-					throw new ValidateException("Неверные данные");
+					throw new ValidateException();
 				}
 			}
 		}),

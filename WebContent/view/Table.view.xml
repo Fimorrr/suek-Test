@@ -6,11 +6,45 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
 	<Page
-		title="{i18n>pagetitle}">
+		title="{i18n>tabletitle}"
+		showNavButton="true"
+		navButtonPress="handleNavButton">
 		<headerContent>
-			<Button press="handleContinue" text="{i18n>continue}" />
+			<Button press="handleDownload" text="{i18n>download}" />
 		</headerContent>
 		<content>
+			<Table id="idProductsTable"
+				inset="false"
+				items="{
+					path: 'values>/items',
+					sorter: {
+						path: 'Name'
+					}
+				}">
+				<columns>
+					<Column mergeDuplicates="true">
+						<Text text="{i18n>category}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>name}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>value}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text
+								text="{values>category}" />
+							<Text
+								text="{values>name}" />
+							<Text
+								text="{values>value}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
 		</content>
 	</Page>
 </mvc:View>

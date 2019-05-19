@@ -59,18 +59,17 @@
 					"target": "form"
 				},
 				{
-					"pattern": "detail",
-					"name": "detail",
-					"target": "detail"
+					"pattern": "table",
+					"name": "table",
+					"target": "table"
 				}
 			],
 			"targets": {
 				"form": {
 					"viewName": "Form"
 				},
-				"detail": {
-					"viewId": "detail",
-					"viewName": "Detail"
+				"table": {
+					"viewName": "Table"
 				}
 			}
 		}

@@ -26,7 +26,7 @@
 						<Text text="{i18n>category}" />
 					</Column>
 					<Column>
-						<Text text="{i18n>name}" />
+						<Text text="{i18n>tname}" />
 					</Column>
 					<Column>
 						<Text text="{i18n>value}" />

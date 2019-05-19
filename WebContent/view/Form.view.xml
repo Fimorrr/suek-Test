@@ -29,7 +29,7 @@
 			singleContainerFullSize="false" >
 			<f:content>
 				<Toolbar ariaLabelledBy="Title1">
-					<Title id="Title1" text="{i18n>personalinformation}" level="H5" titleStyle="H5"/>
+					<Title id="Title1" text="{i18n>personalinformation}" level="H4" titleStyle="H4"/>
 				</Toolbar>
 				<Label text="{i18n>surname}" />
 				<Input value="{path: 'values>/surname', type: '.nameType'}"/>
@@ -45,7 +45,7 @@
 				<Input value="{path: 'values>/age', type: '.ageType'}" enabled="false" type="Number"/>
 				
 				<Toolbar ariaLabelledBy="Title2">
-					<Title id="Title2" text="{i18n>documents}" level="H5" titleStyle="H5"/>
+					<Title id="Title2" text="{i18n>documents}" level="H4" titleStyle="H4"/>
 				</Toolbar>
 				<Label text="{i18n>choosedocument}" />
 				<Select id="country" selectedKey="{values>/documentType}">
@@ -57,14 +57,14 @@
 				</Select>
 				<!--Паспорт-->
 				<Label text="{i18n>serialnumber}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
-				<Input type="Number" value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}">
+				<Input type="Number"  visible="{path: 'values>/documentType', formatter: '.passportFormatter'}">
 					<layoutData>
 						<l:GridData span="XL2 L1 M3 S4" />
 					</layoutData>
 				</Input>
-				<Input type="Number" value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Input type="Number"  visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Label text="{i18n>placeofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Input  visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Label text="{i18n>dateofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<DatePicker
 					placeholder="{i18n>choosedate}"
@@ -72,17 +72,17 @@
 					visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<!--Водительское удостоверение-->
 				<Label text="{i18n>numberid}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
-				<Label text="{i18n>validity}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
+				<Input  visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
+				<Label text="{i18n>dcategory}" visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
+				<Input  visible="{path: 'values>/documentType', formatter: '.driverlicenseFormatter'}"/>
 				<!--Военный билет-->
 				<Label text="{i18n>number}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
+				<Input  visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
 				<Label text="{i18n>commisariat}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
+				<Input  visible="{path: 'values>/documentType', formatter: '.militaryidFormatter'}"/>
 				
 				<Toolbar ariaLabelledBy="Title3">
-					<Title id="Title3" text="{i18n>education}" level="H5" titleStyle="H5"/>
+					<Title id="Title3" text="{i18n>education}" level="H4" titleStyle="H4"/>
 					<ToolbarSpacer />
 					<Button press="handleAddEducationItem" icon="sap-icon://add"/>
 					<Button press="handleRemoveEducationItem" icon="sap-icon://less"/>

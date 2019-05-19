@@ -2,7 +2,7 @@
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true">
-	<Shell>
+	<Shell appWidthLimited="false">
 		<App class="myAppDemoWT" id="app"/>
 	</Shell>
 </mvc:View>

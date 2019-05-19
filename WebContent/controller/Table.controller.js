@@ -21,7 +21,7 @@ sap.ui.define([
 		},
 		
 		handleDownload: function() {
-			
+			sap.m.MessageToast.show("Загрузка на данный момент невозможна");
 		}
 	});
 });

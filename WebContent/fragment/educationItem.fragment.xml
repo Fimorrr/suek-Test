@@ -9,5 +9,5 @@
 	<Label text="{i18n>document}" />
 	<Input change="handleInputChange" fieldGroupIds="education"/>
 	<Label text="{i18n>qualification}" />
-	<Input change="handleInputChange" fieldGroupIds="education" class="sapUiMediumMarginBottom" />
+	<Input change="handleInputChange" fieldGroupIds="education educationlast" class="sapUiMediumMarginBottom" />
 </core:FragmentDefinition>

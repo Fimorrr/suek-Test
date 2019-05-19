@@ -8,6 +8,7 @@ sap.ui.define([
 	return Controller.extend("example.ui.test.controller.Form", {
 		
 		onInit: function() {
+			this.education = 0;
 			
 			var oView = this.getView();
 			var aInputs = this.getAllItems(oView.byId("SimpleFormToolbar"), "sap.m.Input");
@@ -57,16 +58,30 @@ sap.ui.define([
 			let aItem = sap.ui.xmlfragment(oView.getId(), "example.ui.test.fragment.educationItem", this);
 			
 			aItem.forEach((oItem) => {
+				oItem.setFieldGroupIds("education" + this.education);
 				oView.addDependent(oItem);
 				oForm.addContent(oItem);
 			});
-			//oView.addDependent(oItem);
 			
-			//debugger;
-			
-			//console.log(aItem);
-			
+			this.education += 1;
 		},	
+		
+		handleRemoveEducationItem: function(oEvent) {
+			if (this.education == 0) {
+				return;
+			}
+			
+			let oView = this.getView();
+			let oForm = oView.byId("SimpleFormToolbar");
+
+			this.education -= 1;
+			
+			let aControl = oForm.getControlsByFieldGroupId("education" + this.education);
+			
+			aControl.forEach((oControl) => {
+				oForm.removeContent(oControl);
+			});
+		},
 
 		handleContinue : function () {
 			let that = this;
@@ -83,7 +98,9 @@ sap.ui.define([
 				bValidationError = this._validateDatePicker(oDatePicker) || bValidationError;
 			});
 			
-			console.log(bValidationError);
+			if (!bValidationError) {
+				
+			}
 		},
 		
 		getAllItems : function (oView, sName) {
@@ -162,7 +179,6 @@ sap.ui.define([
 				}
 			}
 		}),
-		
 		ageType : SimpleType.extend("Text", {
 			formatValue: function (oValue) {
 				return oValue;

@@ -1,0 +1,16 @@
+<mvc:View
+	controllerName="example.ui.test.controller.Table"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Page
+		title="{i18n>pagetitle}">
+		<headerContent>
+			<Button press="handleContinue" text="{i18n>continue}" />
+		</headerContent>
+		<content>
+		</content>
+	</Page>
+</mvc:View>

@@ -6,9 +6,9 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m">
 	<Page
-		title="test">
+		title="{i18n>pagetitle}">
 		<headerContent>
-			<Button press="handleContinue" text="Готово" />
+			<Button press="handleContinue" text="{i18n>continue}" />
 		</headerContent>
 		<content>
 		<f:SimpleForm id="SimpleFormToolbar"
@@ -57,7 +57,12 @@
 				</Select>
 				<!--Паспорт-->
 				<Label text="{i18n>serialnumber}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
-				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
+				<Input type="Number" value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}">
+					<layoutData>
+						<l:GridData span="XL2 L1 M3 S4" />
+					</layoutData>
+				</Input>
+				<Input type="Number" value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Label text="{i18n>placeofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Input value="{Street}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
 				<Label text="{i18n>dateofissue}" visible="{path: 'values>/documentType', formatter: '.passportFormatter'}"/>
@@ -80,13 +85,8 @@
 					<Title id="Title3" text="{i18n>education}" level="H5" titleStyle="H5"/>
 					<ToolbarSpacer />
 					<Button press="handleAddEducationItem" icon="sap-icon://add"/>
-					<Button press="handleAddEducationItem" icon="sap-icon://less"/>
+					<Button press="handleRemoveEducationItem" icon="sap-icon://less"/>
 				</Toolbar>
-				
-				<!-- <core:Fragment
-					fragmentName="example.ui.test.fragment.educationItem"
-					type="XML" /> -->
-				
 			</f:content>
 		</f:SimpleForm>
 	</content>
